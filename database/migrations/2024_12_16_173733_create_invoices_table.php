@@ -13,18 +13,18 @@ return new class extends Migration {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
+            $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade');
             $table->string('invoice_number')->unique();
-            $table->string('customer_name');
             $table->decimal('amount', 10, 2);
             $table->date('date');
             $table->text('description')->nullable();
             $table->enum('currency', ['EGP', 'USD']);
             $table->enum('payment_status', ['pending', 'paid', 'partially_paid', 'failed', 'refunded', 'overdue'])->default('pending');
+            $table->softDeletes();
             $table->timestamps();
 
 
             $table->index('invoice_number');
-            $table->index('customer_name');
             $table->index('date');
             $table->index('amount');
             $table->index('payment_status');

@@ -10,12 +10,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('log_books', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
-            $table->foreignId('invoice_id')->constrained('invoices')->onDelete('cascade');
-            $table->enum('action_taken', ['create', 'update', 'delete']);
-            $table->string('user_role');
+            $table->string('name');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -25,6 +23,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('log_books');
+        Schema::dropIfExists('customers');
     }
 };
