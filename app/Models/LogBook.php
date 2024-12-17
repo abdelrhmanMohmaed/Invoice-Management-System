@@ -9,10 +9,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class LogBook extends Model
 {
     use HasFactory;
-    protected $fillable = ['created_by', 'action_taken', 'user_role'];
+    protected $fillable = ['invoice_id', 'created_by', 'action_taken', 'user_role'];
 
-    public function create_by(): BelongsTo
+    public function createdBy(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'created_by', 'id');
     }
 }

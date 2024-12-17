@@ -17,6 +17,7 @@ class LogBookFactory extends Factory
     public function definition(): array
     {
         return [
+            'invoice_id' => \App\Models\Invoice::inRandomOrder()->first()->id,
             'created_by' => \App\Models\User::inRandomOrder()->first()->id,
             'action_taken' => $this->faker->randomElement(['create', 'update', 'delete']),
             'user_role' => $this->faker->randomElement(['Admin', 'Employee']),

@@ -18,8 +18,8 @@ class InvoiceFactory extends Factory
     {
         return [
             'created_by' => \App\Models\User::inRandomOrder()->first()->id,
+            'customer_id' => \App\Models\Customer::inRandomOrder()->first()->id,
             'invoice_number' => fake()->unique()->numerify('INV-#####'),
-            'customer_name' => fake()->name(),
             'amount' => fake()->randomFloat(2, 100, 10000),
             'date' => fake()->date('Y-m-d'),
             'description' => fake()->sentence(),
