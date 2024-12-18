@@ -10,4 +10,9 @@ class Customer extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = ['name','email'];
+    protected $casts = [
+        'deleted_at'=> 'datetime:Y-m-d H:i:s',
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
+    ];
 }
