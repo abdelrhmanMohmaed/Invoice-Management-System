@@ -24,7 +24,7 @@ class InvoiceActionPerformed
     /**
      * Create a new event instance.
      */
-    public function __construct(Invoice $invoice, $action, User $user, $role)
+    public function __construct(Invoice $invoice, string $action, User $user, string $role)
     {
         $this->invoice = $invoice;
         $this->action  = $action;

@@ -17,6 +17,14 @@ class PermissionsSeeder extends Seeder
             'create invoice',
             'update invoice',
             'delete invoice',
+            'show customer',
+            'create customer',
+            'update customer',
+            'delete customer',
+            'show user',
+            'create user',
+            'update user',
+            'delete user',
         ];
 
         foreach ($permissions as $permission) {

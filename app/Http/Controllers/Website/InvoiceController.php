@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Website\InvoiceStoreRequest;
-use App\Http\Requests\Website\InvoiceUpdateRequest;
+use App\Http\Requests\Website\Invoice\InvoiceStoreRequest;
+use App\Http\Requests\Website\Invoice\InvoiceUpdateRequest;
 use App\Models\Customer;
 use App\Models\Invoice;
 use Illuminate\Http\RedirectResponse;
