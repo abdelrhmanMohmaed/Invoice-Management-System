@@ -16,6 +16,7 @@ php artisan migrate:fresh
 php artisan db:seed
 # run there comment to run project
 php artisan serve
+php artisan queue:work
 npm run dev
 ```
 ---
