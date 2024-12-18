@@ -25,7 +25,7 @@ class InvoiceStoreRequest extends FormRequest
             'invoice_number' => 'required|string|unique:invoices,invoice_number',
             'customer_id' => 'required|string|exists:customers,id',
             'amount' => 'required|numeric',
-            'date' => 'required|date',
+            'date' => 'required|date|date_format:Y-m-d',
             'description' => 'required|string',
             'currency' => 'required|in:EGP,USD',
             'payment_status' => 'required|in:pending,paid,partially_paid,failed,refunded,overdue',
