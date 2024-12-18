@@ -14,6 +14,19 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::factory(20)->create();
+        $permissions = [
+            'create invoice',
+            'update invoice',
+            'delete invoice',
+            'show customer',
+            'create customer',
+            'update customer',
+            'delete customer',
+            'show user',
+            'create user',
+            'update user',
+            'delete user',
+        ];
 
         User::create(
             [
@@ -21,7 +34,8 @@ class UserSeeder extends Seeder
                 'name' => 'Admin User',
                 'password' => 123456789
             ]
-        )->syncRoles('admin');
+        )->syncRoles('admin')
+            ->givePermissionTo($permissions);
 
         User::create(
             [
@@ -29,6 +43,7 @@ class UserSeeder extends Seeder
                 'name' => 'Employee User',
                 'password' => 123456789
             ]
-        )->syncRoles('employee');
+        )->syncRoles('employee')
+        ->givePermissionTo(['update invoice']);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\InvoiceActionPerformed;
+use App\Jobs\SendInvoiceEmails;
 use App\Models\LogBook;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -28,5 +29,10 @@ class LogInvoiceAction
             'created_by' => $event->user->id,
             'user_role' => $event->role,
         ]);
+
+        if (in_array($event->action, ['create', 'update'])) {
+
+            SendInvoiceEmails::dispatch($event->invoice, $event->action);
+        }
     }
 }
