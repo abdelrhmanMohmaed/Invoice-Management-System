@@ -22,11 +22,12 @@ class InvoiceUpdateRequest extends FormRequest
     public function rules(): array
     {
         $invoice = $this->route('invoice');
+        
         return [
             'invoice_number' => 'required|string|unique:invoices,invoice_number,' . $invoice->id,
             'customer_id' => 'required|string|exists:customers,id',
             'amount' => 'required|numeric',
-            'date' => 'required|date',
+            'date' => 'required|date|date_format:Y-m-d',
             'description' => 'required|string',
             'currency' => 'required|in:EGP,USD',
             'payment_status' => 'required|in:pending,paid,partially_paid,failed,refunded,overdue',

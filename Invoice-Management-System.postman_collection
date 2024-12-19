@@ -1,0 +1,754 @@
+{
+	"info": {
+		"_postman_id": "bac498a2-c1e6-4ba2-80ff-3ecdacba13a5",
+		"name": "Invoice-Management-System",
+		"description": "LoadServ company task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "26049597"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "4|N03GN2fhDj9VlIHCrWdEimH2aqju8kKLPiWMjHmE8ef942f4"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "employee@employee.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "admin@admin.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456789",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8000/api/V1/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "8|EaCuFI2llEJ9nWxTr248uP25uFsgiAHy63PttKWjecb59b47"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "http://127.0.0.1:8000/api/V1/logout"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Invoices",
+			"item": [
+				{
+					"name": "Invoices Index",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "1|1P4BYpdp0K5ayeF5JHuahLDbwAIpwQ9wh4LL0NZG4d55479d"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": "http://127.0.0.1:8000/api/V1/invoices"
+					},
+					"response": []
+				},
+				{
+					"name": "Invoices Show",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "2|jKg8JQ3BBB65WkMH1JVWc5QO3z0sizjkNUI5NPVq8e67959b"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": "http://127.0.0.1:8000/api/V1/invoices/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Invoices Store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "1|1P4BYpdp0K5ayeF5JHuahLDbwAIpwQ9wh4LL0NZG4d55479d"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "customer_id",
+									"value": "1",
+									"description": "required,exists->Customer Table",
+									"type": "text"
+								},
+								{
+									"key": "invoice_number",
+									"value": "XX-1234567",
+									"description": "required,unique",
+									"type": "text"
+								},
+								{
+									"key": "amount",
+									"value": "12.12",
+									"description": "required,numeric",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "2024-12-19",
+									"description": "required,date_format:Y-m-d",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "trst description",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "currency",
+									"value": "EGP",
+									"description": "required,in:EGP,USD",
+									"type": "text"
+								},
+								{
+									"key": "payment_status",
+									"value": "pending",
+									"description": "required,in:pending,paid,partially_paid,failed,refunded,overdue, default => pending",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8000/api/V1/invoices"
+					},
+					"response": []
+				},
+				{
+					"name": "Invoices Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "1|1P4BYpdp0K5ayeF5JHuahLDbwAIpwQ9wh4LL0NZG4d55479d"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "customer_id",
+									"value": "1",
+									"description": "required,exists->Customer Table",
+									"type": "text"
+								},
+								{
+									"key": "invoice_number",
+									"value": "XX-123453",
+									"description": "required,unique",
+									"type": "text"
+								},
+								{
+									"key": "amount",
+									"value": "12.12",
+									"description": "required,numeric",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "2024-12-19",
+									"description": "required,date_format:Y-m-d",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "trst description",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "currency",
+									"value": "EGP",
+									"description": "required,in:EGP,USD",
+									"type": "text"
+								},
+								{
+									"key": "payment_status",
+									"value": "pending",
+									"description": "required,in:pending,paid,partially_paid,failed,refunded,overdue, default => pending",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/V1/invoices/1?_method=PUT",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"V1",
+								"invoices",
+								"1"
+							],
+							"query": [
+								{
+									"key": "_method",
+									"value": "PUT",
+									"description": "_method=PUT"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invoices Destroy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "1|1P4BYpdp0K5ayeF5JHuahLDbwAIpwQ9wh4LL0NZG4d55479d"
+							}
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "http://127.0.0.1:8000/api/V1/invoices/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customers",
+			"item": [
+				{
+					"name": "Customers Index",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "1|1P4BYpdp0K5ayeF5JHuahLDbwAIpwQ9wh4LL0NZG4d55479d"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": "http://127.0.0.1:8000/api/V1/customers"
+					},
+					"response": []
+				},
+				{
+					"name": "Customer Show",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "2|jKg8JQ3BBB65WkMH1JVWc5QO3z0sizjkNUI5NPVq8e67959b"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": "http://127.0.0.1:8000/api/V1/customers/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Customers Store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "2|jKg8JQ3BBB65WkMH1JVWc5QO3z0sizjkNUI5NPVq8e67959b"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Test",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "q@aq.com",
+									"description": "required,email,unique->email",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8000/api/V1/customers"
+					},
+					"response": []
+				},
+				{
+					"name": "Customers Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "2|jKg8JQ3BBB65WkMH1JVWc5QO3z0sizjkNUI5NPVq8e67959b"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "name",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "q@qq.com",
+									"description": "required,email,unique->email",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/V1/customers/1?_method=PUT",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"V1",
+								"customers",
+								"1"
+							],
+							"query": [
+								{
+									"key": "_method",
+									"value": "PUT",
+									"description": "_method=PUT"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customers Destroy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "2|jKg8JQ3BBB65WkMH1JVWc5QO3z0sizjkNUI5NPVq8e67959b"
+							}
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "http://127.0.0.1:8000/api/V1/customers/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Users Index",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "2|jKg8JQ3BBB65WkMH1JVWc5QO3z0sizjkNUI5NPVq8e67959b"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": "http://127.0.0.1:8000/api/V1/users"
+					},
+					"response": []
+				},
+				{
+					"name": "Users Show",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "2|jKg8JQ3BBB65WkMH1JVWc5QO3z0sizjkNUI5NPVq8e67959b"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": "http://127.0.0.1:8000/api/V1/users/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Users Store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "2|jKg8JQ3BBB65WkMH1JVWc5QO3z0sizjkNUI5NPVq8e67959b"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Test",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "aa@aq.com",
+									"description": "required,email,unique->email",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456789",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "123456789",
+									"type": "text"
+								},
+								{
+									"key": "roles[0]",
+									"value": "Admin",
+									"description": "Admin,Employee",
+									"type": "text"
+								},
+								{
+									"key": "permissions[0]",
+									"value": "show customer",
+									"type": "text"
+								},
+								{
+									"key": "permissions[1]",
+									"value": "update customer",
+									"description": "'create invoice',\n'update invoice',\n'delete invoice',\n'show customer',\n'create customer',\n'update customer',\n'delete customer',\n'show user',\n'create user',\n'update user',\n'delete user',",
+									"type": "text"
+								},
+								{
+									"key": "permissions[2]",
+									"value": "create invoice",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8000/api/V1/users"
+					},
+					"response": []
+				},
+				{
+					"name": "Users Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "2|jKg8JQ3BBB65WkMH1JVWc5QO3z0sizjkNUI5NPVq8e67959b"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Test",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "1a@aq.com",
+									"description": "required,email,unique->email",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456789",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "123456789",
+									"type": "text"
+								},
+								{
+									"key": "roles[0]",
+									"value": "Admin",
+									"description": "Admin,Employee",
+									"type": "text"
+								},
+								{
+									"key": "permissions[0]",
+									"value": "show customer",
+									"type": "text"
+								},
+								{
+									"key": "permissions[1]",
+									"value": "update customer",
+									"description": "'create invoice',\n'update invoice',\n'delete invoice',\n'show customer',\n'create customer',\n'update customer',\n'delete customer',\n'show user',\n'create user',\n'update user',\n'delete user',",
+									"type": "text"
+								},
+								{
+									"key": "permissions[2]",
+									"value": "create invoice",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/V1/users/12?_method=PUT",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"V1",
+								"users",
+								"12"
+							],
+							"query": [
+								{
+									"key": "_method",
+									"value": "PUT"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users Destroy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "2|jKg8JQ3BBB65WkMH1JVWc5QO3z0sizjkNUI5NPVq8e67959b"
+							}
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "http://127.0.0.1:8000/api/V1/users/1"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "7|TRn8iYYJjthUagJxgwTQsgZRu9WD7Ggg4NaP72HI95d9578f"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"value": "",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}
