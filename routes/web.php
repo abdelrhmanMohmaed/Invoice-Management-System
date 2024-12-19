@@ -44,7 +44,6 @@ Route::middleware('auth')->group(function () {
             Route::get('{invoice}', 'show')->name('show');
         });
 
-
     Route::prefix('customers')
         ->name('customers.')->controller(CustomerController::class)
         ->middleware(['permission:show customer|create customer|update customer|delete customer'])
@@ -78,9 +77,8 @@ Route::middleware('auth')->group(function () {
             Route::post('', 'store')->name('store');
 
             Route::get('', 'index')->name('index');
-            Route::get('{user}', 'show')->name('show');
+            Route::get('{id}', 'show')->name('show');
         });
-
 
     Route::prefix('profile')
         ->name('profile.')->controller(ProfileController::class)

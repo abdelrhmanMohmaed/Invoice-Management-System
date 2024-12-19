@@ -25,7 +25,21 @@ class CustomerController extends Controller
             $customers->previousPageUrl()
         );
     }
+    public function show($id)
+    {
+        try {
+            $customer = Customer::findOrFail($id);
 
+            return Response::customResponse(
+                true,
+                $customer,
+                'Customer retrieved successfully.'
+            );
+        } catch (Exception $e) {
+            \Log::error('Customer Show Unexpected Error: ' . $e->getMessage());
+            return Response::errorResponse('Something went wrong. Please try again!', 500);
+        }
+    }
     public function store(CustomerStoreRequest $request)
     {
         try {
@@ -46,7 +60,6 @@ class CustomerController extends Controller
             return Response::errorResponse('Something went wrong. Please try again!', 500);
         }
     }
-
     public function update(CustomerUpdateRequest $request, Customer $customer)
     {
         try {
@@ -66,7 +79,6 @@ class CustomerController extends Controller
             return Response::errorResponse('Something went wrong. Please try again!');
         }
     }
-
     public function destroy(Customer $customer)
     {
         try {
