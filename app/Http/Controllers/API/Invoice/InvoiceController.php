@@ -8,7 +8,6 @@ use App\Http\Requests\Website\Invoice\InvoiceUpdateRequest;
 use App\Models\Invoice;
 use Exception;
 use Response;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class InvoiceController extends Controller
 {
@@ -26,7 +25,22 @@ class InvoiceController extends Controller
             $invoices->previousPageUrl()
         );
     }
+    public function show($id)
+    {
+        try {
+            $invoice = Invoice::findOrFail($id);
+            $invoice->load(['createdBy', 'customer']);
 
+            return Response::customResponse(
+                true,
+                $invoice,
+                'Invoice retrieved successfully.'
+            );
+        } catch (Exception $e) {
+            \Log::error('Invoice Show Unexpected Error: ' . $e->getMessage());
+            return Response::errorResponse('Something went wrong. Please try again!', 500);
+        }
+    }
     public function store(InvoiceStoreRequest $request)
     {
         try {
@@ -48,7 +62,6 @@ class InvoiceController extends Controller
             return Response::errorResponse('Something went wrong. Please try again!', 500);
         }
     }
-
     public function update(InvoiceUpdateRequest $request, Invoice $invoice)
     {
         try {
@@ -69,7 +82,6 @@ class InvoiceController extends Controller
             return Response::errorResponse('Something went wrong. Please try again!');
         }
     }
-
     public function destroy(Invoice $invoice)
     {
         try {

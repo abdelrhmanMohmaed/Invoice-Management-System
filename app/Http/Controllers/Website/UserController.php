@@ -68,7 +68,7 @@ class UserController extends Controller
             $user->update([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => $request->has('password') ? bcrypt($request->password) : $user->password,
+                'password' => $request->has('password') ? $request->password : $user->password,
             ]);
 
             if ($request->has('roles')) {

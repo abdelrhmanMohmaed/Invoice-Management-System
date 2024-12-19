@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\API\Customer\CustomerController;
 use App\Http\Controllers\API\Invoice\InvoiceController;
+use App\Http\Controllers\API\User\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,10 +36,11 @@ Route::prefix('V1')
             ->controller(InvoiceController::class)
             ->group(function () {
 
-                Route::get('', 'index');
-                Route::post('', 'store')->middleware('can:create invoice');
                 Route::put('{invoice}', 'update')->middleware('can:update invoice');
                 Route::delete('{invoice}', 'destroy')->middleware('can:delete invoice');
+                Route::post('', 'store')->middleware('can:create invoice');
+                Route::get('', 'index');
+                Route::get('{id}', 'show');
             });
 
         Route::middleware(['auth:sanctum'])
@@ -46,10 +48,23 @@ Route::prefix('V1')
             ->controller(CustomerController::class)
             ->group(function () {
 
-                Route::get('', 'index');
-                Route::post('', 'store')->middleware('can:create customer');
                 Route::put('{customer}', 'update')->middleware('can:update customer');
                 Route::delete('{customer}', 'destroy')->middleware('can:delete customer');
+                Route::post('', 'store')->middleware('can:create customer');
+                Route::get('', 'index');
+                Route::get('{id}', 'show');
             });
 
+
+        Route::middleware(['auth:sanctum'])
+            ->prefix('users')
+            ->controller(UserController::class)
+            ->group(function () {
+
+                Route::put('{user}', 'update')->middleware('can:update user');
+                Route::delete('{user}', 'destroy')->middleware('can:delete user');
+                Route::post('', 'store')->middleware('can:create user');
+                Route::get('', 'index')->middleware('can:show user');
+                Route::get('{id}', 'show')->middleware('can:show user');
+            });
     });
