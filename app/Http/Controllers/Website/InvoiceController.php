@@ -23,7 +23,7 @@ class InvoiceController extends Controller
     }
     public function show(Invoice $invoice): View
     {
-        $invoice->load(['createdBy','customer']);
+        $invoice->load(['createdBy', 'customer']);
 
         return view('website.invoice.show', compact('invoice'));
     }
@@ -38,9 +38,7 @@ class InvoiceController extends Controller
         try {
             $validated               = $request->validated();
             $validated['created_by'] = auth()->id();
-            $invoice                 = Invoice::create($validated);
-
-            event(new InvoiceActionPerformed($invoice, 'create', auth()->user(), auth()->user()->getRoleNames()->first()));
+            Invoice::create($validated);
 
             return redirect()->route('invoices.index')->with('success', 'Invoice created successfully!');
         } catch (Exception $e) {
@@ -69,8 +67,6 @@ class InvoiceController extends Controller
                 'currency' => $validated['currency'],
                 'payment_status' => $validated['payment_status']
             ]);
-
-            event(new InvoiceActionPerformed($invoice, 'update', auth()->user(), auth()->user()->getRoleNames()->first()));
 
             return redirect()->route('invoices.index')->with('success', 'Invoice updated successfully!');
         } catch (Exception $e) {

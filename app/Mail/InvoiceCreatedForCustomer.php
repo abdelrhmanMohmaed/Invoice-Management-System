@@ -16,14 +16,16 @@ class InvoiceCreatedForCustomer extends Mailable
 
     public $invoice;
     public $action;
+    public $changes;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($invoice, string $action)
+    public function __construct($invoice, string $action, $changes = null)
     {
         $this->invoice = $invoice;
         $this->action  = $action;
+        $this->changes = $changes;
     }
 
     /**
@@ -33,7 +35,7 @@ class InvoiceCreatedForCustomer extends Mailable
     {
         return new Envelope(
             from: new Address('no-reply@methode.com', 'Invoice System'),
-            subject: 'Invoice ' . $this->action . " successfully",
+            subject: 'Invoice ' . $this->action . " Successfully",
         );
     }
 
@@ -43,10 +45,11 @@ class InvoiceCreatedForCustomer extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'website.emails.user',  // اسم الـ View
+            view: 'website.emails.customer',
             with: [
-                'invoice' => $this->invoice, // تمرير المتغير invoice
-                'action' => $this->action,  // تمرير المتغير action
+                'invoice' => $this->invoice,
+                'action' => $this->action,
+                'changes' => $this->changes,
             ]
         );
     }

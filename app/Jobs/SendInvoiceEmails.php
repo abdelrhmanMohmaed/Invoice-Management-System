@@ -17,14 +17,16 @@ class SendInvoiceEmails implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     public $invoice;
     public $action;
+    public $changes;
 
     /**
      * Create a new job instance.
      */
-    public function __construct($invoice, $action)
+    public function __construct($invoice, $action, $changes = null)
     {
         $this->invoice = $invoice;
         $this->action  = $action;
+        $this->changes  = $changes;
     }
 
     /**
@@ -32,10 +34,19 @@ class SendInvoiceEmails implements ShouldQueue
      */
     public function handle(): void
     {
-        Mail::to($this->invoice->createdBy->email)->send(new InvoiceCreatedForUser($this->invoice, $this->action));
-        Mail::to($this->invoice->customer->email)->send(new InvoiceCreatedForCustomer($this->invoice, $this->action));
+        if ($this->action == 'update' && !$this->changes) {
+            Log::warning("No changes detected for Invoice ID: {$this->invoice->id}");
+            return;
+        }
+    
+        Mail::to($this->invoice->createdBy->email)->send(
+            new InvoiceCreatedForUser($this->invoice, $this->action, $this->changes)
+        );
+    
+        Mail::to($this->invoice->customer->email)->send(
+            new InvoiceCreatedForCustomer($this->invoice, $this->action, $this->changes)
+        );
     }
-
     public function failed(\Exception $exception): void
     {
         Log::error("Failed to send invoice emails for Invoice ID: {$this->invoice->id}");

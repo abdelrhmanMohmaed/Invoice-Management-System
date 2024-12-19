@@ -16,21 +16,21 @@ class InvoiceActionPerformed
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $invoice;
-    public $action;
-    public $user;
-    public $role;
+    // public $invoice;
+    // public $action;
+    // public $user;
+    // public $role;
 
     /**
      * Create a new event instance.
      */
-    public function __construct(Invoice $invoice, string $action, User $user, string $role)
-    {
-        $this->invoice = $invoice;
-        $this->action  = $action;
-        $this->user    = $user;
-        $this->role    = $role;
-    }
+    // public function __construct(Invoice $invoice, string $action, User $user, string $role)
+    // {
+        // $this->invoice = $invoice;
+        // $this->action  = $action;
+        // $this->user    = $user;
+        // $this->role    = $role;
+    // }
 
     /**
      * Get the channels the event should broadcast on.

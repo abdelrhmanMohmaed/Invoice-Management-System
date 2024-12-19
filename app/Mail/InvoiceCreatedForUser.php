@@ -2,7 +2,6 @@
 
 namespace App\Mail;
 
-use App\Models\Invoice;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -17,13 +16,16 @@ class InvoiceCreatedForUser extends Mailable
 
     public $action;
     public $invoice;
+    public $changes;
+
     /**
      * Create a new message instance.
      */
-    public function __construct($invoice, string $action)
+    public function __construct($invoice, string $action, $changes = null)
     {
         $this->action  = $action;
         $this->invoice = $invoice;
+        $this->changes = $changes;
     }
 
     /**
@@ -33,7 +35,7 @@ class InvoiceCreatedForUser extends Mailable
     {
         return new Envelope(
             from: new Address('no-reply@methode.com', 'Invoice System'),
-            subject: 'Invoice ' . $this->action . " successfully",
+            subject: 'Invoice ' . $this->action . " Successfully",
         );
     }
 
@@ -45,8 +47,9 @@ class InvoiceCreatedForUser extends Mailable
         return new Content(
             view: 'website.emails.user',
             with: [
-                'action' => $this->action,
+                'action'  => $this->action,
                 'invoice' => $this->invoice,
+                'changes' => $this->changes,
             ]
         );
     }

@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
 
         User::create(
             [
-                'email' => 'admin@admin.com',
+                'email' => 'asaid@methode-eg.com',
                 'name' => 'Admin User',
                 'password' => 123456789
             ]

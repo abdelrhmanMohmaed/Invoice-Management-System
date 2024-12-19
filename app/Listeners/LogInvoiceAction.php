@@ -23,16 +23,16 @@ class LogInvoiceAction
      */
     public function handle(InvoiceActionPerformed $event): void
     {
-        LogBook::create([
-            'invoice_id' => $event->invoice->id,
-            'action_taken' => $event->action,
-            'created_by' => $event->user->id,
-            'user_role' => $event->role,
-        ]);
+        // LogBook::create([
+        //     'invoice_id' => $event->invoice->id,
+        //     'action_taken' => $event->action,
+        //     'created_by' => $event->user->id,
+        //     'user_role' => $event->role,
+        // ]);
 
-        if (in_array($event->action, ['create', 'update'])) {
+        // if (in_array($event->action, ['create', 'update'])) {
 
-            SendInvoiceEmails::dispatch($event->invoice, $event->action);
-        }
+        //     SendInvoiceEmails::dispatch($event->invoice, $event->action);
+        // }
     }
 }
