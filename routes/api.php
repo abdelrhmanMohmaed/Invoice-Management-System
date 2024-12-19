@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\Auth\AuthController;
+use App\Http\Controllers\API\Customer\CustomerController;
 use App\Http\Controllers\API\Invoice\InvoiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,17 @@ Route::prefix('V1')
                 Route::post('', 'store')->middleware('can:create invoice');
                 Route::put('{invoice}', 'update')->middleware('can:update invoice');
                 Route::delete('{invoice}', 'destroy')->middleware('can:delete invoice');
+            });
+
+        Route::middleware(['auth:sanctum'])
+            ->prefix('customers')
+            ->controller(CustomerController::class)
+            ->group(function () {
+
+                Route::get('', 'index');
+                Route::post('', 'store')->middleware('can:create customer');
+                Route::put('{customer}', 'update')->middleware('can:update customer');
+                Route::delete('{customer}', 'destroy')->middleware('can:delete customer');
             });
 
     });
